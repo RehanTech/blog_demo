@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'comments/create'
+  get 'comments/destroy'
   get 'users/profile'
   
   devise_for :users, controllers: {
@@ -7,7 +9,9 @@ Rails.application.routes.draw do
       }
   get '/u/:id', to: 'users#profile', as: 'user'
   
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   get 'about', to: 'pages#about'
   root 'pages#home'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
